@@ -18,6 +18,11 @@
 #define FNT_IMG_WIDTH 256
 #define FNT_PATH "/usr/local/share/fpv/unifont.png"
 
+#define MARGIN_BOTTOM 16
+#define MARGIN_LEFT 28
+#define MARGIN_RIGHT 28
+#define MARGIN_TOP 16
+
 #define REC_IMG_HEIGHT 64
 #define REC_IMG_WIDTH 64
 #define REC_PATH "/usr/local/share/fpv/rec.png"
@@ -693,7 +698,7 @@ void osd_update(osd_t osd)
 
 		draw_string_t draw = {
 			.string = buffer,
-			.origin = {0, 0},
+			.origin = {MARGIN_LEFT, MARGIN_TOP},
 			.anchor = {0, 0},
 			.color = {255, 255, 255, 255},
 			.scale = 2.0f,
@@ -708,7 +713,7 @@ void osd_update(osd_t osd)
 		sprintf(buffer, "BAT % 3u.%u V (%uS)", osd->voltage / 1000, (osd->voltage % 1000) / 100, osd->cells);
 		draw_string_t draw = {
 			.string = buffer,
-			.origin = {0, 2 * FNT_CELL_HEIGHT},
+			.origin = {MARGIN_LEFT, 2 * FNT_CELL_HEIGHT + MARGIN_TOP},
 			.anchor = {0, 0},
 			.color = {0, 255, 0, 255},
 			.scale = 2.0f,
@@ -746,7 +751,7 @@ void osd_update(osd_t osd)
 
 		draw_string_t draw = {
 			.string = buffer,
-			.origin = {0, 4 * FNT_CELL_HEIGHT},
+			.origin = {MARGIN_LEFT, 4 * FNT_CELL_HEIGHT + MARGIN_TOP},
 			.anchor = {0, 0},
 			.color = {255, 255, 255, 255},
 			.scale = 2.0f,
@@ -759,7 +764,7 @@ void osd_update(osd_t osd)
 		glBindTexture(GL_TEXTURE_2D, osd->rec_texture);
 
 		draw_texture_t draw = {
-			.origin = {osd->screen.width, 0},
+			.origin = {osd->screen.width - MARGIN_RIGHT, MARGIN_TOP},
 			.anchor = {1.0f, 0.0f},
 			.size = REC_IMG_WIDTH, REC_IMG_HEIGHT,
 			.tex_a = {0.0f, 0.0f},
